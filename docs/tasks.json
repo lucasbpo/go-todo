@@ -1,0 +1,8 @@
+{
+	"_id": "ObjectID",
+	"title": "string",
+	"description": "string",
+	"tags": "[]string",
+	"assign": "ObjectID",
+	"done": "bool"
+}
