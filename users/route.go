@@ -6,4 +6,6 @@ func SetRoutes(r fiber.Router) {
 	users := r.Group("/users")
 
 	users.Post("/", addUser)
+	users.Get("/", getAll)
+	users.Get("/:id", getByID)
 }
