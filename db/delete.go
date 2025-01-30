@@ -10,7 +10,7 @@ import (
 func DeleteByID(collection, id string) error {
 	client, ctx, cancel := createConnection()
 
-	conn := client.Database(dbname).Collection(collection)
+	coll := client.Database(dbname).Collection(collection)
 
 	objectID, err := bson.ObjectIDFromHex(id)
 	if err != nil {
@@ -19,7 +19,7 @@ func DeleteByID(collection, id string) error {
 
 	filter := bson.M{"_id": objectID}
 
-	result, err := conn.DeleteOne(context.Background(), filter)
+	result, err := coll.DeleteOne(context.Background(), filter)
 	if err != nil {
 		return err
 	}

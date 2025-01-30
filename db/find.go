@@ -9,9 +9,9 @@ import (
 func Find(collection string, documents any) error {
 	client, ctx, cancel := createConnection()
 
-	conn := client.Database(dbname).Collection(collection)
+	coll := client.Database(dbname).Collection(collection)
 
-	cursor, err := conn.Find(context.Background(), bson.D{})
+	cursor, err := coll.Find(context.Background(), bson.D{})
 
 	if err != nil {
 		return err
@@ -25,7 +25,7 @@ func Find(collection string, documents any) error {
 func FindByID(collection, id string, document any) error {
 	client, ctx, cancel := createConnection()
 
-	conn := client.Database(dbname).Collection(collection)
+	coll := client.Database(dbname).Collection(collection)
 
 	objectID, err := bson.ObjectIDFromHex(id)
 	if err != nil {
@@ -36,5 +36,5 @@ func FindByID(collection, id string, document any) error {
 
 	defer closeConnection(client, ctx, cancel)
 
-	return conn.FindOne(context.Background(), filter).Decode(document)
+	return coll.FindOne(context.Background(), filter).Decode(document)
 }

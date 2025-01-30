@@ -10,7 +10,7 @@ import (
 func UpdateByID(collection, id string, data, result any) error {
 	client, ctx, cancel := createConnection()
 
-	conn := client.Database(dbname).Collection(collection)
+	coll := client.Database(dbname).Collection(collection)
 
 	objectID, err := bson.ObjectIDFromHex(id)
 	if err != nil {
@@ -21,12 +21,12 @@ func UpdateByID(collection, id string, data, result any) error {
 
 	opts := options.FindOneAndUpdate().SetUpsert(false)
 
-	err = conn.FindOneAndUpdate(
+	err = coll.FindOneAndUpdate(
 		context.Background(), filter, bson.M{"$set": data}, opts).Err()
 	if err != nil {
 		return err
 	}
 
 	defer closeConnection(client, ctx, cancel)
-	return conn.FindOne(context.Background(), filter).Decode(result)
+	return coll.FindOne(context.Background(), filter).Decode(result)
 }

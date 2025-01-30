@@ -9,9 +9,9 @@ import (
 func Insert(collection string, data any) (bson.ObjectID, error) {
 	client, ctx, cancel := createConnection()
 
-	conn := client.Database(dbname).Collection(collection)
+	coll := client.Database(dbname).Collection(collection)
 
-	res, err := conn.InsertOne(context.Background(), data)
+	res, err := coll.InsertOne(context.Background(), data)
 
 	if err != nil {
 		return bson.NilObjectID, err
