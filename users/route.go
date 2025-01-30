@@ -9,4 +9,5 @@ func SetRoutes(r fiber.Router) {
 	users.Get("/", getAll)
 	users.Get("/:id", getByID)
 	users.Put("/:id", updateUser)
+	users.Delete("/:id", deleteUser)
 }
