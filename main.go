@@ -10,7 +10,7 @@ import (
 func main() {
 	app := fiber.New()
 
-	v1 := app.Group("/v1")
+	v1 := app.Group("/api/v1")
 
 	users.SetRoutes(v1)
 	tags.SetRoutes(v1)
